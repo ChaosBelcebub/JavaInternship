@@ -65,19 +65,30 @@ public class Anwendungsbeispiel
     System.out.println("USD: " + UsdValue);
 
     // Number 3. Count weight of coins and area of notes
+    // Number 4. Count height of coins
     double weight = 0.0;
     double area = 0.0;
+    double height = 0.0;
     for (int i = 0; i < geldGueltig.length; ++i) {
       if (geldGueltig[i] instanceof Muenze)
       {
-        weight += geldGueltig[i].getGewicht();
+        weight += ((Muenze)geldGueltig[i]).getGewicht();
+        height += ((Muenze)geldGueltig[i]).getDicke();
       }
       else
       {
-        area += geldGueltig[i].getLaenge() * geldGueltig[i].getBreite();
+        area += ((Schein)geldGueltig[i]).getLaenge() * ((Schein)geldGueltig[i]).getBreite();
       }
     }
-    System.out.println("Gewicht der Münzen:" + weight);
-    System.out.println("Fläche der Scheine:" + area);
+    System.out.println("Gewicht der Münzen:" + weight + " g");
+    System.out.println("Fläche der Scheine:" + area + " cm²");
+    System.out.println("Höhe der Münzen:" + height + " cm");
+
+    // Number 5. Sort array with merge sort by value
+    Sort.mergesort(geld);
+    System.out.println("Sortiert nach Wert:");
+    for (int i = 0; i < geld.length; ++i) {
+      System.out.println(" " + geld[i].getWert() + " " + geld[i].getWaehrung());
+    }
   }
 }
