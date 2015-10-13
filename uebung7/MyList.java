@@ -78,6 +78,7 @@ public class MyList<T>
     next = element.getNext();
 
     prev.setNext(next);
+    --size;
     return element.getValue();
   }
 }

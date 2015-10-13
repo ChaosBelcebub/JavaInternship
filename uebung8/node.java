@@ -10,5 +10,16 @@ public class Node
   private Node lNode, rNode;
   private int leafs;
 
-  // public Node()
+  public Node(String v)
+  {
+    value = v;
+    lNode = null;
+    rNode = null;
+    leafs = 0;
+  }
+
+  public void add(Node n)
+  {
+    
+  }
 }

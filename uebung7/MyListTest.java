@@ -29,7 +29,7 @@ public class MyListTest
       f.add(new Fraction(1, i));
     }
     f.remove(3);
-    for (int i = f.size() - 2; i >= 0; --i) {
+    for (int i = f.size() - 1; i >= 0; --i) {
       System.out.print(f.get(i).get() + " | ");
     }
     System.out.println();
