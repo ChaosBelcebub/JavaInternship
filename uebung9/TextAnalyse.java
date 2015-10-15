@@ -1,9 +1,11 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.SortedMap;
 
 public class TextAnalyse {
-    private static SortedMap<String, Integer> map;
+    private static SortedMap<String, ArrayList<Integer>> map;
+    private static Integer line;
     private static boolean isLetter(char c) {
        return ( (('a' <= c) && (c <= 'z')) ||
                 (('A' <= c) && (c <= 'Z')) ||
@@ -20,6 +22,10 @@ public class TextAnalyse {
        // wait for next letter
        do {ci=f.read();
            c=(char)ci;
+           if (c == '\n')
+           {
+             ++line;
+           }
           } while (!isLetter(c) && (ci!=-1));
        // wait for end of word
        while (isLetter(c)) {
@@ -35,19 +41,22 @@ public class TextAnalyse {
     
     public static void main(String[] args) {
       try {	
-    	   BufferedReader f=new BufferedReader(new FileReader("Beispieltext.txt"));
+    	   BufferedReader f=new BufferedReader(new FileReader("TextAnalyse.class"));
     	   String s;
-         map = new TreeMap<String, Integer>();
+         map = new TreeMap<String, ArrayList<Integer>>();
+         line = 1;
 
            while ((s=TextAnalyse.readWord(f))!=null) {
         	  if (map.containsKey(s))
         	  {
-              int n = map.get(s);
-        	    map.put(s, ++n);
+              ArrayList<Integer> l = map.get(s);
+              l.add(line);
+        	    map.put(s, l);
         	  }
             else
             {
-              map.put(s, 1);
+              map.put(s, new ArrayList<Integer>());
+              (map.get(s)).add(line);
             }
            }
           } catch (IOException e) {
