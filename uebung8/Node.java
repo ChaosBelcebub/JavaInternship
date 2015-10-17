@@ -25,31 +25,34 @@ public class Node
     return value;
   }
 
-  // Add a new node or leave ordered by value
-  public void add(Node n)
+  // Return the left node
+  public Node getLeftNode()
   {
-    if (this.value.compareTo(n.getValue()) >= 0)
-    {
-      if (this.rNode == null)
-      {
-        this.rNode = n;
-      }
-      else
-      {
-        this.rNode.add(n);
-      }
-    }
-    else
-    {
-      if (this.lNode == null)
-      {
-        this.lNode = n;
-      }
-      else
-      {
-        this.lNode.add(n);
-      }
-    }
+    return lNode;
+  }
+
+  // Set the left node
+  public void setLeftNode(Node n)
+  {
+    lNode = n;
+  }
+
+  // Return the right node
+  public Node getRightNode()
+  {
+    return rNode;
+  }
+
+  // Set the right node
+  public void setRightNode(Node n)
+  {
+    rNode = n;
+  }
+
+  // Return the amount of leafs
+  public int getLeafs()
+  {
+    return leafs;
   }
 
   // Count the leafs at the bottom of the tree
@@ -70,6 +73,7 @@ public class Node
     {
       rLeafs = rNode.countLeafs();
     }
-    return lLeafs + rLeafs;
+    this.leafs = lLeafs + rLeafs;
+    return leafs;
   }
 }
