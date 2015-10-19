@@ -7,24 +7,24 @@
 
 public class Tree
 {
-  private Node root;
+  private Root root;
 
   // Constructor
   public Tree()
   {
-    root = null;
+    root = new Root();
   }
 
   // Add a new node
   public void add(Node n)
   {
-    if (root == null)
+    if (root.head == null)
     {
-      root = n;
+      root.head = n;
     }
     else
     {
-      Node destination = root;
+      Node destination = root.head;
       while (true)
       {
         if (destination.getValue().compareTo(n.getValue()) >= 0)
@@ -73,6 +73,111 @@ public class Tree
   // Print the tree
   public void print()
   {
-    printTree(this.root);
+    printTree(this.root.head);
+  }
+
+  private void rebalanceTree(Node n)
+  {
+    Node right = n.getRightNode();
+    Node left = n.getLeftNode();
+
+    if (left != null)
+    {
+      // Check if the node is a leaf
+      if (left.getLeftNode() != null && left.getRightNode() != null)
+      {
+        rebalanceTree(left);
+      }
+    }
+    else
+    {
+      return;
+    }
+
+    if (right != null)
+    {
+      // Check if the node is a leaf
+      if (right.getLeftNode() != null && right.getRightNode() != null)
+      {
+        rebalanceTree(right);
+      }
+    }
+    else
+    {
+      return;
+    }
+
+    if (left.getLeftNode() != null && left.getRightNode() != null)
+    {
+      rotateLeftNode(n);
+    }
+    if (right.getLeftNode() != null && right.getRightNode() != null)
+    {
+      rotateRightNode(n);
+    }
+  }
+
+  // Rebalance the tree
+  public void rebalance()
+  {
+    this.root.head.countLeafs();
+    rebalanceTree(this.root.head);
+  }
+
+  // Get balance
+  private double rho(Node n)
+  {
+    double left = n.getLeftNode().getLeafs();
+    double right = n.getRightNode().getLeafs();
+    return ( left / (left + right) );
+  }
+
+  // Rotate
+  private void rotateLeftNode(Node n)
+  {
+    Node left = n.getLeftNode();
+    double b = rho(left);
+    if (b < 0.333)
+    {
+      Node x = left.getLeftNode();
+      Node y = left.getRightNode();
+      n.setLeftNode(y);
+      add(x);
+      System.out.println("Rotated left");
+    }
+    else if (b > 0.666)
+    {
+      Node x = left.getLeftNode();
+      Node y = left.getRightNode();
+      n.setLeftNode(x);
+      add(y);
+      System.out.println("Rotated right");
+    }
+  }
+
+  private void rotateRightNode(Node n)
+  {
+    Node right = n.getRightNode();
+    double b = rho(right);
+    if (b < 0.333)
+    {
+      Node x = right.getLeftNode();
+      Node y = right.getRightNode();
+      n.setLeftNode(y);
+      add(x);
+      System.out.println("Rotated left");
+    }
+    else if (b > 0.666)
+    {
+      //Node x = right.getLeftNode();
+      //Node y = right.getRightNode();
+      //n.setLeftNode(x);
+      //add(y);
+      //System.out.println("Rotated right");
+      System.out.println("Error");
+      System.out.println(right.getValue());
+      System.out.println(right.getLeftNode().getValue());
+      System.out.println(right.getRightNode().getValue());
+    }
   }
 }

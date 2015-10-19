@@ -31,9 +31,7 @@ public class CollectionTest
       tree.add(new Node(s));
       hashTable.put(s);
     }
-
-    // TODO: Balace tree Do 15 Okt 2015 16:00:08 CEST
-    
+    tree.rebalance();
     // Print
     System.out.println();
     System.out.println("Liste:");
