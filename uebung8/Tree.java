@@ -109,12 +109,9 @@ public class Tree
 
     if (left.getLeftNode() != null && left.getRightNode() != null)
     {
-      rotateLeftNode(n);
+      rotateNode(n);
     }
-    if (right.getLeftNode() != null && right.getRightNode() != null)
-    {
-      rotateRightNode(n);
-    }
+
   }
 
   // Rebalance the tree
@@ -133,7 +130,7 @@ public class Tree
   }
 
   // Rotate
-  private void rotateLeftNode(Node n)
+  private void rotateNode(Node n)
   {
     Node left = n.getLeftNode();
     double b = rho(left);
@@ -143,7 +140,6 @@ public class Tree
       Node y = left.getRightNode();
       n.setLeftNode(y);
       add(x);
-      System.out.println("Rotated left");
     }
     else if (b > 0.666)
     {
@@ -151,33 +147,6 @@ public class Tree
       Node y = left.getRightNode();
       n.setLeftNode(x);
       add(y);
-      System.out.println("Rotated right");
-    }
-  }
-
-  private void rotateRightNode(Node n)
-  {
-    Node right = n.getRightNode();
-    double b = rho(right);
-    if (b < 0.333)
-    {
-      Node x = right.getLeftNode();
-      Node y = right.getRightNode();
-      n.setLeftNode(y);
-      add(x);
-      System.out.println("Rotated left");
-    }
-    else if (b > 0.666)
-    {
-      //Node x = right.getLeftNode();
-      //Node y = right.getRightNode();
-      //n.setLeftNode(x);
-      //add(y);
-      //System.out.println("Rotated right");
-      System.out.println("Error");
-      System.out.println(right.getValue());
-      System.out.println(right.getLeftNode().getValue());
-      System.out.println(right.getRightNode().getValue());
     }
   }
 }
