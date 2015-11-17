@@ -38,6 +38,7 @@ public class Graph
     }
 
     edges.add(new Edge(nodes.get(source), nodes.get(destination), weight));
+    edges.add(new Edge(nodes.get(destination), nodes.get(source), weight));
   }
 
   public Set<String> getNodes()

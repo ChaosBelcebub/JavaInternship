@@ -41,7 +41,7 @@ public class TextAnalyse {
     
     public static void main(String[] args) {
       try {	
-    	   BufferedReader f=new BufferedReader(new FileReader("TextAnalyse.class"));
+    	   BufferedReader f=new BufferedReader(new FileReader("TextAnalyse.java"));
     	   String s;
          map = new TreeMap<String, ArrayList<Integer>>();
          line = 1;
